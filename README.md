@@ -19,6 +19,8 @@ Application Windows 11 — écran blanc plein écran pendant vos créneaux de co
 | Statistiques | Sessions et minutes de focus enregistrées |
 | Démarrage auto | Registre Windows + option dans les paramètres |
 
+Les créneaux peuvent traverser minuit, par exemple `22:00 → 02:00`.
+
 ## Créneaux par défaut
 
 | Période |
@@ -44,6 +46,10 @@ dotnet run -c Release
 ```
 
 Exécutable : `bin\Release\net9.0-windows\FocusHeure.exe`
+
+Une compilation Windows est vérifiée automatiquement par GitHub Actions à chaque
+push et chaque pull request vers `main`. L'action produit également un exécutable
+portable `win-x64` téléchargeable depuis l'onglet **Actions**.
 
 ## Tray
 

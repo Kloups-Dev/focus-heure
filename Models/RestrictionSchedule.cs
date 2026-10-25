@@ -31,7 +31,7 @@ public sealed class RestrictionSchedule
             var start = window.StartTime.Value;
             var end = window.EndTime.Value;
 
-            if (time >= start && time < end)
+            if (Contains(time, start, end))
                 return true;
         }
 
@@ -50,7 +50,7 @@ public sealed class RestrictionSchedule
             var start = window.StartTime.Value;
             var end = window.EndTime.Value;
 
-            if (time >= start && time < end)
+            if (Contains(time, start, end))
                 return (start, end);
         }
 
@@ -69,7 +69,10 @@ public sealed class RestrictionSchedule
         if (w is null)
             return null;
 
-        var endToday = DateOnly.FromDateTime(now).ToDateTime(w.Value.End);
+        var endDay = w.Value.End > w.Value.Start
+            ? DateOnly.FromDateTime(now)
+            : DateOnly.FromDateTime(now).AddDays(1);
+        var endToday = endDay.ToDateTime(w.Value.End);
         var remaining = endToday - now;
         return remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero;
     }
@@ -122,7 +125,8 @@ public sealed class RestrictionSchedule
                 var end = window.EndTime.Value;
 
                 var startDt = day.ToDateTime(start);
-                var endDt = day.ToDateTime(end);
+                var endDay = end > start ? day : day.AddDays(1);
+                var endDt = endDay.ToDateTime(end);
                 if (!WouldSkip(settings, startDt))
                     candidates.Add(startDt);
                 if (!WouldSkip(settings, endDt))
@@ -163,4 +167,9 @@ public sealed class RestrictionSchedule
 
         return false;
     }
+
+    private static bool Contains(TimeOnly time, TimeOnly start, TimeOnly end) =>
+        start < end
+            ? time >= start && time < end
+            : time >= start || time < end;
 }

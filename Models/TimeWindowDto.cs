@@ -43,5 +43,8 @@ public sealed class TimeWindowDto
         EndTime = TimeOnly.TryParse(_end, out var e) ? e : null;
     }
 
-    public bool IsValid() => StartTime is not null && EndTime is not null;
+    public bool IsValid() =>
+        StartTime is not null &&
+        EndTime is not null &&
+        StartTime.Value != EndTime.Value;
 }

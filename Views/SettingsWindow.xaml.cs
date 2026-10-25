@@ -91,7 +91,9 @@ public partial class SettingsWindow : Window
 
             if (!dto.IsValid())
             {
-                System.Windows.MessageBox.Show("Format horaire invalide (HH:mm).", "Focus Heure",
+                System.Windows.MessageBox.Show(
+                    "Format horaire invalide (HH:mm), ou début et fin identiques.",
+                    "Focus Heure",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
