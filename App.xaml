@@ -1,0 +1,8 @@
+﻿<Application x:Class="FocusHeure.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <FontFamily x:Key="BebasNeue">pack://application:,,,/Fonts/BebasNeue-Regular.ttf#Bebas Neue</FontFamily>
+    </Application.Resources>
+</Application>
